@@ -6,7 +6,7 @@ import { soundEngine } from './SoundEngine';
 import './index.css';
 
 // --- CONFIGURAZIONE API ---
-const API_BASE = "http://localhost:8000"; // Assicurarsi che il Backend sia su questa porta
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "https://smart-core.onrender.com";
 const SESSION_ID = "REL-OPP-002"; // ID Fisso per il test
 
 // --- COMPONENTE 3D: Dodecaedro Frattale ---

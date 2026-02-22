@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@700&display=swap');
+
+:root {
+  --bg-color: #050505;
+  --grid-color: rgba(255, 255, 255, 0.03);
+  --node-bg: #000000;
+  --text-primary: #FFFFFF;
+  --text-secondary: #666666;
+  --accent-error: #FF0000;
+  --accent-success: #FFFFFF;
+  --vector-width: 2px;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* Griglia Zenitale */
+.workspace-grid {
+  position: absolute;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background-image: linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Nodi Ghost */
+.node {
+  position: absolute;
+  width: 120px;
+  height: 40px;
+  background: var(--node-bg);
+  border: 1px solid var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  z-index: 10;
+  cursor: grab;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.node:active {
+  cursor: grabbing;
+  border-color: var(--text-primary);
+  box-shadow: 0 0 15px rgba(255,255,255,0.1);
+}
+
+/* Console Deep-Why */
+.console-log {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-secondary);
+  pointer-events: none;
+  z-index: 100;
+  max-width: 400px;
+}
+
+.console-entry {
+  margin-bottom: 4px;
+  opacity: 0.8;
+}
+
+.console-error {
+  color: var(--accent-error);
+  font-weight: bold;
+}
+
+/* Effetti Vettori SVG (Simulazione Shader per DOM) */
+.vector-line {
+  stroke: var(--text-secondary);
+  stroke-width: 2;
+  transition: stroke 0.3s;
+}
+
+.vector-line.valid { stroke: var(--text-primary); }
+.vector-line.error { stroke: var(--accent-error); animation: shake 0.2s; }
+.vector-line.pulse { animation: pulse 2s infinite; stroke: #00FFFF; opacity: 0.8; }
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px); }
+  50% { transform: translate(-1px, -1px); }
+  100% { transform: translate(1px, 1px); }
+}
+
+@keyframes pulse {
+  0% { stroke-width: 2; opacity: 0.5; }
+  50% { stroke-width: 4; opacity: 1; }
+  100% { stroke-width: 2; opacity: 0.5; }
+}
+
+/* 3D Container */
+#fractal-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 150px;
+  height: 150px;
+  z-index: 20;
+  pointer-events: none;
+}
